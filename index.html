@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>Gửi HYến Dễ Thương</title>
+  <style>
+    body {
+      margin: 0;
+      background: linear-gradient(to bottom, #fff0f5, #ffffff);
+      overflow: hidden;
+      height: 100vh;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .sentence {
+      position: absolute;
+      font-size: 28px;
+      font-weight: bold;
+      color: #d6336c;
+      animation: fall 6s linear forwards;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+
+    @keyframes fall {
+      0% {
+        transform: translateY(-50px);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+
+    .heart-falling, .bubble {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: fallDown 6s linear forwards;
+    }
+
+    .heart-falling {
+      background-color: pink;
+      transform: rotate(45deg);
+    }
+
+    .heart-falling::before,
+    .heart-falling::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: pink;
+      border-radius: 50%;
+    }
+
+    .heart-falling::before {
+      top: -10px;
+      left: 0;
+    }
+
+    .heart-falling::after {
+      left: -10px;
+      top: 0;
+    }
+
+    .bubble {
+      background-color: rgba(173, 216, 230, 0.4);
+      border: 1px solid rgba(173, 216, 230, 0.6);
+    }
+
+    @keyframes fallDown {
+      0% {
+        transform: translateY(-10vh);
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(110vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  const sentences = [
+    "MTrí yêu HYến vãi cả chưởng hehe.",
+    "Mỗi ngày nhắn tin với em chính là niềm vui đối với anh.",
+    "Em là người đã giúp anh quên đi mọi muộn phiền, âu lo.",
+    "Chỉ cần có em, mọi khó khăn đều trở nên nhẹ nhàng.",
+    "Nụ cười của em là ánh sáng sưởi ấm trái tim anh.",
+    "hehehehehehe.",
+    "Em là người anh muốn nắm tay đi hết cuộc đời.",
+    "Cám ơn em vì đã luôn ở bên anh động viên, an ủi.",
+    "Anh cảm ơn em vì đã xuất hiện trong quãng đường thanh xuân này.",
+    "Mỗi khoảnh khắc bên em đều là điều anh trân trọng nhất."
+  ];
+
+  let index = 0;
+
+  function dropSentence() {
+    const span = document.createElement("span");
+    span.textContent = sentences[index];
+    span.className = "sentence";
+    span.style.left = Math.random() * 60 + 20 + "vw";
+    document.body.appendChild(span);
+
+    setTimeout(() => span.remove(), 7000);
+    index = (index + 1) % sentences.length;
+  }
+
+  setInterval(dropSentence, 3000);
+
+  function randomBetween(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+
+  // Tạo trái tim rơi
+  function createFallingHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart-falling";
+    heart.style.left = randomBetween(0, 100) + "vw";
+    heart.style.animationDuration = randomBetween(4, 7) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 8000);
+  }
+
+  // Tạo bong bóng rơi
+  function createBubble() {
+    const bubble = document.createElement("div");
+    bubble.className = "bubble";
+    bubble.style.left = randomBetween(0, 100) + "vw";
+    bubble.style.width = bubble.style.height = randomBetween(10, 30) + "px";
+    bubble.style.animationDuration = randomBetween(5, 9) + "s";
+    document.body.appendChild(bubble);
+
+    setTimeout(() => bubble.remove(), 9000);
+  }
+
+  setInterval(createFallingHeart, 300);
+  setInterval(createBubble, 500);
+</script>
+
+</body>
+</html>
